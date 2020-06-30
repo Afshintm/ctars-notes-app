@@ -1,14 +1,9 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
-
 import NotesPage  from "./components/NotesPage";
-
-
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { Button } from '@material-ui/core';
 
@@ -48,17 +43,6 @@ function App() {
         </Grid>
         <Grid item xs={12}>
           <NotesPage></NotesPage>
-        </Grid>
-        
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>
-            <span>This is a test</span><br/>
-            <Button variant="contained" color="primary">Edit</Button>
-              <Button variant="contained" color="secondary">Delete</Button>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          
         </Grid>
         <Grid item xs={12}>
           <Copyright />

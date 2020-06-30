@@ -2,6 +2,11 @@ import React from "react";
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+
 
 class NotesPage extends React.Component {
   constructor(props) {
@@ -59,28 +64,29 @@ class NotesPage extends React.Component {
   },
   title: {
     fontSize: 14,
-  },
-  pos: {
     marginBottom: 12,
   },
       }));
     return (
-    <div className={classes.root}>
       <Grid container spacing={3}>
         {this.state.notes.map((note) => {
           return (
             <Grid item xs={6} sm={3}>
-            <div key={note.id}>
-              <p>{note.text}</p>
+            <Card key={note.id}>
+            <CardContent>
+              <Typography className={classes.title} color="textPrimary" gutterBottom>
+                {note.text}
+              </Typography>
+            </CardContent>
+            <CardActions>
               <Button color="primary">Edit</Button>
               <Button color="secondary">Delete</Button>
-            </div>
+            </CardActions>
+            </Card>
             </Grid>
-
           );
         })}
       </Grid>
-    </div>
     );
   }
 }
