@@ -46,9 +46,8 @@ class NotesPage extends React.Component {
   }
 
   deleteNote = (id,e) => {
-    console.log('this is:', this);
-    console.log('note:'+id);
-    console.log('event:'+e);
+    const items = this.state.notes.filter((x) => x.id!==id);
+    this.setState({notes:items});
   }
 
   render() {
@@ -110,7 +109,7 @@ class NotesPage extends React.Component {
                 </CardContent>
                 <CardActions>
                   <Button color="primary">Edit</Button>
-                  <Button color="secondary">Delete</Button>
+                  <Button color="secondary" onClick={(e) => this.deleteNote(n.id, e)}>Delete</Button>
                 </CardActions>
               </Card>}
             </Grid>
