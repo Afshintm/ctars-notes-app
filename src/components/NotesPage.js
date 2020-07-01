@@ -45,6 +45,12 @@ class NotesPage extends React.Component {
         );
   }
 
+  deleteNote = (id,e) => {
+    console.log('this is:', this);
+    console.log('note:'+id);
+    console.log('event:'+e);
+  }
+
   render() {
     const classes = makeStyles((theme) => ({
         root: {
@@ -69,20 +75,20 @@ class NotesPage extends React.Component {
       }));
     return (
       <Grid container spacing={3}>
-        {this.state.notes.map((note) => {
+        {this.state.notes.map((n) => {
           return (
             <Grid item xs={6} sm={3}>
-            <Card key={note.id}>
-            <CardContent>
-              <Typography className={classes.title} color="textPrimary" gutterBottom>
-                {note.text}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button color="primary">Edit</Button>
-              <Button color="secondary">Delete</Button>
-            </CardActions>
-            </Card>
+              <Card key={n.id}>
+                <CardContent>
+                  <Typography className={classes.title} color="textPrimary" gutterBottom>
+                    {n.text}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button color="primary">Edit</Button>
+                  <Button color="secondary">Delete</Button>
+                </CardActions>
+              </Card>
             </Grid>
           );
         })}
