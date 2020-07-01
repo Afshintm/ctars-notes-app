@@ -62,23 +62,47 @@ class NotesPage extends React.Component {
           textAlign: 'center',
           color: theme.palette.text.secondary,
         },
-        
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-    marginBottom: 12,
-  },
+        bullet: {
+          display: 'inline-block',
+          margin: '0 2px',
+          transform: 'scale(0.8)',
+        },
+        title: {
+          fontSize: 14,
+          marginBottom: 12,
+        },
       }));
+
+
+      // let cardList = [];
+      // let fields = Object.keys(this.state.notes);
+      // console.log(fields);
+      // fields.forEach((cardIndex) => {
+      //     let card = this.state.notes[cardIndex];
+      //     cardList.push(
+      //       <Grid item xs={6} sm={3} key={cardIndex}>
+      //         <Card>
+      //           <CardContent>
+      //             <Typography className={classes.title} color="textPrimary" gutterBottom>
+      //               {card.text}
+      //             </Typography>
+      //           </CardContent>
+      //           <CardActions>
+      //             <Button color="primary">Edit</Button>
+      //             <Button color="secondary">Delete</Button>
+      //           </CardActions>
+      //         </Card>
+      //       </Grid>
+      //     )
+      // });
+
+
     return (
       <Grid container spacing={3}>
         {this.state.notes.map((n) => {
           return (
-            <Grid item xs={6} sm={3}>
-              <Card key={n.id}>
+            <Grid item xs={6} sm={3} key={n.id}>
+              {<Card>
                 <CardContent>
                   <Typography className={classes.title} color="textPrimary" gutterBottom>
                     {n.text}
@@ -88,10 +112,11 @@ class NotesPage extends React.Component {
                   <Button color="primary">Edit</Button>
                   <Button color="secondary">Delete</Button>
                 </CardActions>
-              </Card>
+              </Card>}
             </Grid>
           );
         })}
+        {/* {cardList} */}
       </Grid>
     );
   }
