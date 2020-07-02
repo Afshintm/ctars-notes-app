@@ -20,33 +20,7 @@ class NotesPage extends React.Component {
     this.textInput = React.createRef();
   }
   componentDidMount(){
-      // this.setState(
-      //     { notes:
-      //       [
-      //           {
-      //               id: 1,
-      //               text: "Simple Note1"
-      //           },
-      //           {
-      //               id: 2,
-      //               text: "Simple 22"
-      //           },
-      //           {
-      //               id: 3,
-      //               text: "Simple 33"
-      //           },
-      //           {
-      //               id: 4,
-      //               text: "Simple 44"
-      //           },
-      //           {
-      //               id: 5,
-      //               text: "Simple 55"
-      //           },
-
-      //       ]
-      //   }
-      //   );
+      
   }
 
   deleteNote = (id,e) => {
@@ -54,6 +28,10 @@ class NotesPage extends React.Component {
     items.splice(id,1);
     this.setState({notes:items});
   };
+  editNote = (id,e) =>{
+    let item = this.state.notes[id];
+    this.textInput.current.value = item.text;
+  }
 
   changeNoteText= (e) => {
     //this.setState({newNote:{text: e.target.value}});
@@ -76,19 +54,6 @@ class NotesPage extends React.Component {
       this.setState({notes:allNotes});
       this.textInput.current.value = null;
     }
-
-
-    //let note = this.state.newNote;
-    //console.log(note.text);
-    // if(note.text !== undefined){
-    //   note.guid = this.uuidv4();
-    //   let notesNew = [...this.state.notes];
-    //   notesNew.push(note);
-    //   this.setState({notes:notesNew});
-    //   console.log(this.textInput.current);
-    //   this.textInput.current.value = '';
-    // }
-    
   }
 
   render() {
@@ -113,11 +78,9 @@ class NotesPage extends React.Component {
         },
       }));
       
-
       let cardList = [];
       let fields = Object.keys(this.state.notes);
       
-      //console.log(fields);
       fields.forEach((cardIndex) => {
           let card = this.state.notes[cardIndex];
           cardList.push(
@@ -129,8 +92,8 @@ class NotesPage extends React.Component {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button color="primary">Edit</Button>
-                  <Button color="secondary" onClick={(e) => this.deleteNote(cardIndex, e)}>Delete</Button>
+                  <Button color="primary" onClick={(e)=> this.editNote(cardIndex, e) }>Edit</Button>
+                  <Button color="secondary" onClick={(e) => this.deleteNote(cardIndex, e) }>Delete</Button>
                 </CardActions>
               </Card>
             </Grid>
@@ -151,23 +114,6 @@ class NotesPage extends React.Component {
               
               <Button onClick={() => this.addNewNote()}>Add Note</Button>
         </Grid>
-        {/* {this.state.notes.map((n) => {
-          return (
-            <Grid item xs={6} sm={3} key={n.guid} value={n.text}>
-              <Card>
-                <CardContent>
-                  <Typography className={classes.title} color="textPrimary" gutterBottom>
-                    {n.text}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button color="primary">Edit</Button>
-                  <Button color="secondary" onClick={(e) => this.deleteNote(n.guid, e)}>Delete</Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          );
-        })} */}
         {cardList}
       </Grid>
     );
