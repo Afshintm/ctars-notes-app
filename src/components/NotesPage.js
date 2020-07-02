@@ -72,10 +72,9 @@ class NotesPage extends React.Component {
           textAlign: 'center',
           color: theme.palette.text.secondary,
         },
-        bullet: {
-          display: 'inline-block',
-          margin: '0 2px',
-          transform: 'scale(0.8)',
+        topgrid: {
+          padding: theme.spacing(2),
+          marginBottom: 2,
         },
         title: {
           fontSize: 14,
@@ -89,7 +88,7 @@ class NotesPage extends React.Component {
       fields.forEach((cardIndex) => {
           let card = this.state.notes[cardIndex];
           cardList.push(
-            <Grid item xs={6} sm={3} key={cardIndex}>
+            <Grid item xs={6} sm={4} key={cardIndex}>
               <Card>
                 <CardContent>
                   <Typography className={classes.title} color="textPrimary" gutterBottom>
@@ -106,18 +105,22 @@ class NotesPage extends React.Component {
       });
 
     return (
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         <Grid item xs={12}>
               <TextField
                 id="filled-textarea"
                 placeholder="Note here..."
                 variant="filled"
+                fullWidth
                 value={this.state.value}
                 onChange={(e) => this.changeNoteText(e)}
               />
-              
-              <Button onClick={() => this.addNewNote()} disabled={this.state.editMode}>Add Note</Button>
-              <Button onClick={() => this.saveChanges()} disabled={!this.state.editMode}>Save Chages</Button>
+        </Grid>
+        <Grid item xs={6}>
+          <Button fullWidth className={classes.paper}  onClick={() => this.addNewNote()} disabled={this.state.editMode}>Add Note</Button>
+        </Grid>
+        <Grid item xs={6}>
+          <Button fullWidth className={classes.paper} onClick={() => this.saveChanges()} disabled={!this.state.editMode}>Save Chages</Button>
         </Grid>
         {cardList}
       </Grid>

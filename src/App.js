@@ -10,10 +10,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  paper: {
+  topgrid: {
     padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
+    marginTop: 1
   },
 }));
 
@@ -36,7 +35,7 @@ function App() {
   return (
     <Container maxWidth="lg">
       <div className={classes.root}>
-      <Grid container spacing={3}>
+      <Grid container spacing={2} className={classes.topgrid}>
         <Grid item xs={12}>
           <NotesPage></NotesPage>
         </Grid>
