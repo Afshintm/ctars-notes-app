@@ -19,7 +19,6 @@ class NotesPage extends React.Component {
       id:-1
     };
     this.index = -1;
-    this.textInput = React.createRef();
   }
 
   addNewNote = () => {
@@ -113,7 +112,6 @@ class NotesPage extends React.Component {
                 id="filled-textarea"
                 placeholder="Note here..."
                 variant="filled"
-                inputRef={this.textInput}
                 value={this.state.value}
                 onChange={(e) => this.changeNoteText(e)}
               />
