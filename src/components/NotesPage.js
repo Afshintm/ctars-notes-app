@@ -14,10 +14,10 @@ class NotesPage extends React.Component {
     super(props);
     this.state = {
       notes: [],
-      newNote:{},
-      count:0
+      newNote:{}
     };
     this.index = -1;
+    this.textInput = React.createRef();
   }
   componentDidMount(){
       // this.setState(
@@ -56,7 +56,7 @@ class NotesPage extends React.Component {
   };
 
   changeNoteText= (e) => {
-    this.setState({newNote:{text: e.target.value}});
+    //this.setState({newNote:{text: e.target.value}});
   }
 
   uuidv4 = () => {
@@ -67,15 +67,27 @@ class NotesPage extends React.Component {
     });
   }
   addNewNote = () => {
-    let note = this.state.newNote;
-    console.log(note.text);
-    if(note.text !== undefined){
-      note.guid = this.uuidv4();
-      let notesNew = [...this.state.notes];
-      notesNew.push(note);
-      this.setState({notes:notesNew});
-      this.inputTitle.value = "";
+    let note = this.textInput.current.value;
+    console.log(note);
+    if(note!==''){
+      const newNote ={id:++this.index,text:note}; 
+      let allNotes = [...this.state.notes];
+      allNotes.push(newNote);
+      this.setState({notes:allNotes});
+      this.textInput.current.value = null;
     }
+
+
+    //let note = this.state.newNote;
+    //console.log(note.text);
+    // if(note.text !== undefined){
+    //   note.guid = this.uuidv4();
+    //   let notesNew = [...this.state.notes];
+    //   notesNew.push(note);
+    //   this.setState({notes:notesNew});
+    //   console.log(this.textInput.current);
+    //   this.textInput.current.value = '';
+    // }
     
   }
 
@@ -101,7 +113,6 @@ class NotesPage extends React.Component {
         },
       }));
       
-
 
       let cardList = [];
       let fields = Object.keys(this.state.notes);
@@ -130,21 +141,15 @@ class NotesPage extends React.Component {
     return (
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          
-            <div>
               <TextField
                 id="filled-textarea"
                 placeholder="Note here..."
-                multiline
                 variant="filled"
-                ref={el => this.inputTitle = el}
-                onChange={(e)=>this.changeNoteText(e)}
-                type="reset"
+                inputRef={this.textInput}
+                onChange={(e) => this.changeNoteText(e)}
               />
               
               <Button onClick={() => this.addNewNote()}>Add Note</Button>
-            </div>
-          
         </Grid>
         {/* {this.state.notes.map((n) => {
           return (
