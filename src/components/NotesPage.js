@@ -14,13 +14,22 @@ class NotesPage extends React.Component {
     super(props);
     this.state = {
       notes: [],
-      newNote:{}
+      editMode: false,
+      value:'',
+      id:-1
     };
     this.index = -1;
     this.textInput = React.createRef();
   }
-  componentDidMount(){
-      
+
+  addNewNote = () => {
+    let note = this.state.value;
+    if(note!==''){
+      const newNote ={id:++this.index,text:note}; 
+      let allNotes = [...this.state.notes];
+      allNotes.push(newNote);
+      this.setState({notes:allNotes, value:''});
+    }
   }
 
   deleteNote = (id,e) => {
@@ -28,13 +37,21 @@ class NotesPage extends React.Component {
     items.splice(id,1);
     this.setState({notes:items});
   };
+
+  saveChanges = (e) =>{
+    
+    let allNotes = this.state.notes;
+    allNotes[this.state.id].text = this.state.value;
+    this.setState({notes:allNotes,value:'',id:-1,editMode:false});
+  }
+
   editNote = (id,e) =>{
     let item = this.state.notes[id];
-    this.textInput.current.value = item.text;
+    this.setState({value:item.text,id:id,editMode:true});
   }
 
   changeNoteText= (e) => {
-    //this.setState({newNote:{text: e.target.value}});
+    this.setState({value: e.target.value});
   }
 
   uuidv4 = () => {
@@ -43,17 +60,6 @@ class NotesPage extends React.Component {
       var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
     });
-  }
-  addNewNote = () => {
-    let note = this.textInput.current.value;
-    console.log(note);
-    if(note!==''){
-      const newNote ={id:++this.index,text:note}; 
-      let allNotes = [...this.state.notes];
-      allNotes.push(newNote);
-      this.setState({notes:allNotes});
-      this.textInput.current.value = null;
-    }
   }
 
   render() {
@@ -100,7 +106,6 @@ class NotesPage extends React.Component {
           )
       });
 
-
     return (
       <Grid container spacing={3}>
         <Grid item xs={12}>
@@ -109,10 +114,12 @@ class NotesPage extends React.Component {
                 placeholder="Note here..."
                 variant="filled"
                 inputRef={this.textInput}
+                value={this.state.value}
                 onChange={(e) => this.changeNoteText(e)}
               />
               
-              <Button onClick={() => this.addNewNote()}>Add Note</Button>
+              <Button onClick={() => this.addNewNote()} disabled={this.state.editMode}>Add Note</Button>
+              <Button onClick={() => this.saveChanges()} disabled={!this.state.editMode}>Save Chages</Button>
         </Grid>
         {cardList}
       </Grid>
