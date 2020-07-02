@@ -114,13 +114,14 @@ class NotesPage extends React.Component {
                 fullWidth
                 value={this.state.value}
                 onChange={(e) => this.changeNoteText(e)}
+                inputRef={input => input && input.focus()}
               />
         </Grid>
         <Grid item xs={6}>
-          <Button fullWidth className={classes.paper}  onClick={() => this.addNewNote()} disabled={this.state.editMode}>Add Note</Button>
+          <Button fullWidth variant="contained" color="primary" className={classes.paper}  onClick={() => this.addNewNote()} disabled={this.state.editMode}>Add Note</Button>
         </Grid>
         <Grid item xs={6}>
-          <Button fullWidth className={classes.paper} onClick={() => this.saveChanges()} disabled={!this.state.editMode}>Save Chages</Button>
+          <Button fullWidth variant="contained" color="primary" className={classes.paper} onClick={() => this.saveChanges()} disabled={!this.state.editMode}>Save Chages</Button>
         </Grid>
         {cardList}
       </Grid>
